@@ -1,41 +1,11 @@
-interface Option {
-  title: string;
-}
+import { Editor } from "./pages/Editor";
 
-interface Item {
-  question: string,
-  isMultiple?: boolean,
-  options: Option[]
-}
-
-
-interface Quiz {
-  headline: string,
-  items: Item[]
-}
-
-const testQuiz: Quiz = {
-  headline: 'How well do you know JS?',
-  items: [
-    {
-      question: 'Is JS using in Backend?',
-      options: [{
-        title: 'Yes'
-      },
-      {
-        title: 'No'
-      },
-      {
-        title: 'Maybe yes, maybe no'
-      }]
-    }
-  ]
-}
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      
+      <Editor />
     </div>
   );
 }
