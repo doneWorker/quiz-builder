@@ -1,18 +1,11 @@
 import { useContext } from "react";
 import List from "@mui/material/List";
-import Button from "@mui/material/Button";
 import { QuizContext } from "../../quiz.context";
 import { Question } from "./Question";
 
 export const Questions = () => {
-  const {
-    quiz,
-    createQuestion,
-    updateQuestion,
-    createOption,
-    updateOption,
-    deleteOption,
-  } = useContext(QuizContext);
+  const { quiz, updateQuestion, createOption, updateOption, deleteOption } =
+    useContext(QuizContext);
 
   return (
     <>
@@ -21,6 +14,7 @@ export const Questions = () => {
           {quiz.items.map((item: QuizItem) => (
             <Question
               key={item.id}
+              isEditing={false}
               question={item.question}
               options={item.options}
               updateQuestion={(title: string) => updateQuestion(item.id, title)}
@@ -33,9 +27,6 @@ export const Questions = () => {
           ))}
         </List>
       </div>
-      <Button variant="outlined" onClick={createQuestion}>
-        Add Question
-      </Button>
     </>
   );
 };

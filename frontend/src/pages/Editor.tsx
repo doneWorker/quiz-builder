@@ -9,6 +9,7 @@ import {
 } from "../quiz.context";
 import { Headline } from "../components/editor/Headline";
 import { Questions } from "../components/editor/Questions";
+import { Actions } from "../components/editor/Actions";
 
 export const Editor: React.FC = () => {
   const [quiz, dispatch] = useReducer(QuizReducer, initialState);
@@ -20,6 +21,7 @@ export const Editor: React.FC = () => {
   return (
     <QuizContext.Provider value={provider}>
       <Container maxWidth="md">
+        <Actions />
         <Headline />
         <Questions />
       </Container>
