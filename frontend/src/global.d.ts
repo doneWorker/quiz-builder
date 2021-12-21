@@ -2,6 +2,7 @@
 interface QuizOption {
   id: string;
   title: string;
+  isCorrect: boolean;
 }
 
 interface QuizItem {

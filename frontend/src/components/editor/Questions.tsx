@@ -1,15 +1,18 @@
 import { useContext } from "react";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import { QuizContext } from "../../quiz.context";
 import { Question } from "./Question";
 
 export const Questions = () => {
-  const { quiz, createQuestion } = useContext(QuizContext);
+  const {
+    quiz,
+    createQuestion,
+    updateQuestion,
+    createOption,
+    updateOption,
+    deleteOption,
+  } = useContext(QuizContext);
 
   return (
     <>
@@ -20,6 +23,12 @@ export const Questions = () => {
               key={item.id}
               question={item.question}
               options={item.options}
+              updateQuestion={(title: string) => updateQuestion(item.id, title)}
+              createOption={() => createOption(item.id)}
+              deleteOption={deleteOption}
+              updateOption={(optId: string, data: Record<string, any>) =>
+                updateOption(item.id, optId, data)
+              }
             />
           ))}
         </List>

@@ -1,13 +1,19 @@
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { Option } from "./Option";
 
 interface Props {
   question: string;
-  options: Record<string, any>[];
+  options: QuizOption[];
+  updateQuestion: Function;
+  createOption: Function;
+  updateOption: Function;
+  deleteOption: Function;
 }
 
 export const Question = (props: Props) => {
@@ -20,9 +26,31 @@ export const Question = (props: Props) => {
           size="small"
           variant="outlined"
           value={props.question}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            props.updateQuestion(e.target.value)
+          }
         />
-        <Typography sx={{ mt: 4 }}>OPTIONS</Typography>
-        <Button variant="outlined" startIcon={<AddIcon />}>
+        <div>
+          <Typography sx={{ mt: 4 }}>OPTIONS</Typography>
+          <List>
+            {props.options.map((opt) => (
+              <Option
+                key={opt.id}
+                isCorrect={opt.isCorrect}
+                title={opt.title}
+                updateOption={(data: Record<string, any>) =>
+                  props.updateOption(opt.id, data)
+                }
+                deleteOption={() => props.deleteOption(opt.id)}
+              />
+            ))}
+          </List>
+        </div>
+        <Button
+          variant="outlined"
+          startIcon={<AddIcon />}
+          onClick={() => props.createOption()}
+        >
           Add option
         </Button>
       </Paper>
