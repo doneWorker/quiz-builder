@@ -11,6 +11,7 @@ export const actions: ReducerActions = {
   CREATE_QUESTION: "CREATE_QUESTION",
   UPDATE_QUESTION: "UPDATE_QUESTION",
   DELETE_QUESTION: "DELETE_QUESTION",
+  CLONE_QUESTION: "CLONE_QUESTION",
   MOVE_QUESTION: "MOVE_QUESTION",
   CREATE_OPTION: "CREATE_OPTION",
   UPDATE_OPTION: "UPDATE_OPTION",
@@ -18,6 +19,7 @@ export const actions: ReducerActions = {
   MOVE_OPTION: "MOVE_OPTION",
 };
 
+// TODO: generate nanoid in reducer
 // TODO: use immer.js
 export const QuizReducer = (state: Quiz, action: ReducerAction): Quiz => {
   switch (action.type) {
@@ -37,6 +39,21 @@ export const QuizReducer = (state: Quiz, action: ReducerAction): Quiz => {
         (item) => item.id !== action.payload.id
       );
       return { ...state, items: filteredItems };
+    case actions.CLONE_QUESTION:
+      const clone = state.items.find((item) => item.id === action.payload.id);
+      return clone
+        ? {
+            ...state,
+            items: [
+              ...state.items,
+              {
+                ...clone,
+                id: action.payload.cloneId,
+                options: clone.options.map((opt) => ({ ...opt, id: nanoid() })),
+              },
+            ],
+          }
+        : state;
     case actions.CREATE_OPTION:
       const createdOptions = state.items.map((item) =>
         item.id === action.payload.id
@@ -89,6 +106,13 @@ export const getQuizMethods = (
 
   deleteQuestion: (id: string): void => {
     dispatch({ type: actions.DELETE_QUESTION, payload: { id } });
+  },
+
+  cloneQuestion: (id: string): void => {
+    dispatch({
+      type: actions.CLONE_QUESTION,
+      payload: { id, cloneId: nanoid() },
+    });
   },
 
   createOption: (qId: string): void => {

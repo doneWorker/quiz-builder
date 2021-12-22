@@ -4,8 +4,15 @@ import { QuizContext } from "../../quiz.context";
 import { Question } from "./Question";
 
 export const Questions = () => {
-  const { quiz, updateQuestion, createOption, updateOption, deleteOption } =
-    useContext(QuizContext);
+  const {
+    quiz,
+    updateQuestion,
+    deleteQuestion,
+    cloneQuestion,
+    createOption,
+    updateOption,
+    deleteOption,
+  } = useContext(QuizContext);
 
   return (
     <>
@@ -18,6 +25,8 @@ export const Questions = () => {
               question={item.question}
               options={item.options}
               updateQuestion={(title: string) => updateQuestion(item.id, title)}
+              deleteQuestion={() => deleteQuestion(item.id)}
+              cloneQuestion={() => cloneQuestion(item.id)}
               createOption={() => createOption(item.id)}
               deleteOption={deleteOption}
               updateOption={(optId: string, data: Record<string, any>) =>

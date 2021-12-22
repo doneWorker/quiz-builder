@@ -21,6 +21,8 @@ interface Props {
   isEditing: boolean;
   options: QuizOption[];
   updateQuestion: Function;
+  deleteQuestion: Function;
+  cloneQuestion: Function;
   createOption: Function;
   updateOption: Function;
   deleteOption: Function;
@@ -72,12 +74,20 @@ export const Question = memo((props: Props) => {
         <Divider sx={{ mt: 3, mb: 3 }} />
         <Stack justifyContent="flex-end" spacing={2} direction="row">
           <Tooltip placement="top" title="Clone Question">
-            <IconButton aria-label="clone" size="small">
+            <IconButton
+              aria-label="clone"
+              size="small"
+              onClick={() => props.cloneQuestion()}
+            >
               <ContentCopyIcon fontSize="small" />
             </IconButton>
           </Tooltip>
           <Tooltip placement="top" title="Delete Question">
-            <IconButton aria-label="delete" size="small">
+            <IconButton
+              aria-label="delete"
+              size="small"
+              onClick={() => props.deleteQuestion()}
+            >
               <DeleteIcon fontSize="small" />
             </IconButton>
           </Tooltip>
