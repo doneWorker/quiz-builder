@@ -172,16 +172,24 @@ const QuestionLabel = (props: Props & { onEdit: Function }) => {
 // IDEA
 // copy all props to state
 // dispatch them only after "Done" button pressed
-export const Question = memo((props: Props) => {
-  const [isEditing, setIsEditing] = useState<Boolean>(false);
+export const Question = memo(
+  (props: Props) => {
+    const [isEditing, setIsEditing] = useState<Boolean>(false);
 
-  return (
-    <ListItem sx={{ p: 0, mb: 3 }}>
-      {isEditing ? (
-        <QuestionForm {...props} onDone={() => setIsEditing(false)} />
-      ) : (
-        <QuestionLabel {...props} onEdit={() => setIsEditing(true)} />
-      )}
-    </ListItem>
-  );
-});
+    return (
+      <ListItem sx={{ p: 0, mb: 3 }}>
+        {isEditing ? (
+          <QuestionForm {...props} onDone={() => setIsEditing(false)} />
+        ) : (
+          <QuestionLabel {...props} onEdit={() => setIsEditing(true)} />
+        )}
+      </ListItem>
+    );
+  },
+  (prev, next) => {
+    if (prev.options !== next.options || prev.question !== next.question) {
+      return false;
+    }
+    return true;
+  }
+);

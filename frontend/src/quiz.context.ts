@@ -97,57 +97,62 @@ export const QuizReducer = (state: Quiz, action: ReducerAction): Quiz => {
 
 export const getQuizMethods = (
   dispatch: React.Dispatch<ReducerAction>
-): Record<string, Function> => ({
-  updateHeadline: (headline: string): void => {
-    dispatch({ type: actions.UPDATE_HEADLINE, payload: headline });
-  },
+): Record<string, Function> => {
+  return {
+    updateHeadline: (headline: string): void => {
+      dispatch({ type: actions.UPDATE_HEADLINE, payload: headline });
+    },
 
-  createQuestion: (): void => {
-    const newItem = { id: nanoid(), question: "", options: [] };
-    dispatch({ type: actions.CREATE_QUESTION, payload: { item: newItem } });
-  },
+    createQuestion: (): void => {
+      const newItem = { id: nanoid(), question: "", options: [] };
+      dispatch({ type: actions.CREATE_QUESTION, payload: { item: newItem } });
+    },
 
-  updateQuestion: (id: string, question: string): void => {
-    dispatch({ type: actions.UPDATE_QUESTION, payload: { id, question } });
-  },
+    updateQuestion: (id: string, question: string): void => {
+      dispatch({ type: actions.UPDATE_QUESTION, payload: { id, question } });
+    },
 
-  deleteQuestion: (id: string): void => {
-    dispatch({ type: actions.DELETE_QUESTION, payload: { id } });
-  },
+    deleteQuestion: (id: string): void => {
+      dispatch({ type: actions.DELETE_QUESTION, payload: { id } });
+    },
 
-  cloneQuestion: (id: string): void => {
-    dispatch({
-      type: actions.CLONE_QUESTION,
-      payload: { id, cloneId: nanoid() },
-    });
-  },
+    cloneQuestion: (id: string): void => {
+      dispatch({
+        type: actions.CLONE_QUESTION,
+        payload: { id, cloneId: nanoid() },
+      });
+    },
 
-  moveQuestion: (srcIndex: number, destIndex: number): void => {
-    dispatch({ type: actions.MOVE_QUESTION, payload: { srcIndex, destIndex } });
-  },
+    moveQuestion: (srcIndex: number, destIndex: number): void => {
+      dispatch({
+        type: actions.MOVE_QUESTION,
+        payload: { srcIndex, destIndex },
+      });
+    },
 
-  createOption: (qId: string): void => {
-    const newItem: QuizOption = { id: nanoid(), title: "", isCorrect: false };
-    dispatch({
-      type: actions.CREATE_OPTION,
-      payload: { id: qId, item: newItem },
-    });
-  },
+    createOption: (qId: string): void => {
+      const newItem: QuizOption = { id: nanoid(), title: "", isCorrect: false };
+      dispatch({
+        type: actions.CREATE_OPTION,
+        payload: { id: qId, item: newItem },
+      });
+    },
 
-  updateOption: (
-    qId: string,
-    optId: string,
-    data: Record<string, any>
-  ): void => {
-    dispatch({
-      type: actions.UPDATE_OPTION,
-      payload: { questionId: qId, optionId: optId, item: data },
-    });
-  },
+    updateOption: (
+      qId: string,
+      optId: string,
+      data: Record<string, any>
+    ): void => {
+      dispatch({
+        type: actions.UPDATE_OPTION,
+        payload: { questionId: qId, optionId: optId, item: data },
+      });
+    },
 
-  deleteOption: (id: string): void => {
-    dispatch({ type: actions.DELETE_OPTION, payload: { id } });
-  },
-});
+    deleteOption: (id: string): void => {
+      dispatch({ type: actions.DELETE_OPTION, payload: { id } });
+    },
+  };
+};
 
 export const QuizContext = createContext(initialState);

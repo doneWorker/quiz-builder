@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useMemo } from "react";
 import Container from "@mui/material/Container";
 
 import {
@@ -13,9 +13,10 @@ import { Actions } from "../components/editor/Actions";
 
 export const Editor: React.FC = () => {
   const [quiz, dispatch] = useReducer(QuizReducer, initialState);
+  const methods = useMemo(() => getQuizMethods(dispatch), [dispatch]);
   const provider = {
     quiz,
-    ...getQuizMethods(dispatch),
+    ...methods,
   };
 
   return (
