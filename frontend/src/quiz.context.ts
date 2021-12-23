@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import { nanoid } from "nanoid";
+import { arrayMoveImmutable } from "array-move";
 
 export const initialState: any = {
   headline: "My first Quiz",
@@ -54,6 +55,12 @@ export const QuizReducer = (state: Quiz, action: ReducerAction): Quiz => {
             ],
           }
         : state;
+    case actions.MOVE_QUESTION:
+      const { srcIndex, destIndex } = action.payload;
+      return {
+        ...state,
+        items: arrayMoveImmutable(state.items, srcIndex, destIndex),
+      };
     case actions.CREATE_OPTION:
       const createdOptions = state.items.map((item) =>
         item.id === action.payload.id
@@ -113,6 +120,10 @@ export const getQuizMethods = (
       type: actions.CLONE_QUESTION,
       payload: { id, cloneId: nanoid() },
     });
+  },
+
+  moveQuestion: (srcIndex: number, destIndex: number): void => {
+    dispatch({ type: actions.MOVE_QUESTION, payload: { srcIndex, destIndex } });
   },
 
   createOption: (qId: string): void => {
