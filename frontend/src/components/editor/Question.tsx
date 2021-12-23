@@ -34,7 +34,16 @@ interface Props {
 
 const QuestionForm = (props: Props & { onDone: Function }) => {
   return (
-    <Paper elevation={5} sx={{ width: "100%", p: 3, pt: 0 }}>
+    <Paper
+      elevation={5}
+      sx={{
+        width: "100%",
+        p: 3,
+        pt: 0,
+        borderLeft: "5px solid",
+        borderColor: "primary.main",
+      }}
+    >
       <Box
         component="span"
         sx={{ m: 1, display: "flex", justifyContent: "center" }}
