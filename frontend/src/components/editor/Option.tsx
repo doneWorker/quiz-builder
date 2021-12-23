@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import ListItem from "@mui/material/ListItem";
-import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import Checkbox from "@mui/material/Checkbox";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -43,7 +43,7 @@ export const Option = (props: Props) => {
           size="small"
           onClick={() => props.deleteOption()}
         >
-          <DeleteIcon fontSize="small" />
+          <CloseIcon fontSize="small" />
         </IconButton>
       </Tooltip>
     </ListItem>
