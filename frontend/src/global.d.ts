@@ -17,6 +17,8 @@ interface Quiz {
   items: QuizItem[];
 }
 
+type QuizResult = Record<string, string>;
+
 /* Common */
 type ReducerActions = Record<string, string>;
 type ReducerAction = { type: string; payload?: any };

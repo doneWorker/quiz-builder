@@ -1,5 +1,5 @@
 import { useContext } from "react";
-
+import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -10,7 +10,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { QuizContext } from "../../quiz.context";
 
 export const Actions = () => {
-  const { createQuestion } = useContext(QuizContext);
+  const { createQuestion, quiz } = useContext(QuizContext);
+
+  const exportQuiz = () => {
+    alert(JSON.stringify(quiz));
+  };
 
   return (
     <Paper
@@ -28,17 +32,15 @@ export const Actions = () => {
         <Button
           variant="contained"
           startIcon={<UpgradeIcon />}
-          onClick={createQuestion}
+          onClick={exportQuiz}
         >
           Export
         </Button>
-        <Button
-          variant="contained"
-          startIcon={<VisibilityIcon />}
-          onClick={createQuestion}
-        >
-          Preview
-        </Button>
+        <Link to="/preview">
+          <Button variant="contained" startIcon={<VisibilityIcon />}>
+            Preview
+          </Button>
+        </Link>
       </Stack>
     </Paper>
   );

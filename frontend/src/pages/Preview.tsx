@@ -1,7 +1,14 @@
-interface Props {
-    title: string
-}
+import { useContext } from "react";
+import Container from "@mui/material/Container";
+import { QuizContext } from "../quiz.context";
+import { Quiz } from "../components/preview/Quiz";
 
-export const Option: React.FC<Props> = ({ title }) => (
-    <h2>Hello user: {title} !</h2>
-)
+export const Preview: React.FC = () => {
+  const { quiz } = useContext(QuizContext);
+
+  return (
+    <Container maxWidth="md">
+      <Quiz data={quiz} />
+    </Container>
+  );
+};
