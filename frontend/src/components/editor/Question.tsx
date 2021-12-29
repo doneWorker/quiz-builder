@@ -21,6 +21,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Option } from "./Option";
 
 interface Props {
+  id: string;
   question: string;
   isEditing: boolean;
   options: QuizOption[];
@@ -30,6 +31,8 @@ interface Props {
   createOption: Function;
   updateOption: Function;
   deleteOption: Function;
+  moveUp: Function;
+  moveDown: Function;
 }
 
 const QuestionForm = (props: Props & { onDone: Function }) => {
@@ -130,18 +133,18 @@ const QuestionLabel = (props: Props & { onEdit: Function }) => {
         >
           <Tooltip placement="top" title="Move Question Up">
             <IconButton
-              aria-label="clone"
+              aria-label="move up"
               size="small"
-              onClick={() => props.cloneQuestion()}
+              onClick={() => props.moveUp()}
             >
               <ArrowUpwardIcon fontSize="small" />
             </IconButton>
           </Tooltip>
           <Tooltip placement="top" title="Move Question Down">
             <IconButton
-              aria-label="clone"
+              aria-label="move down"
               size="small"
-              onClick={() => props.cloneQuestion()}
+              onClick={() => props.moveDown()}
             >
               <ArrowDownwardIcon fontSize="small" />
             </IconButton>
@@ -187,9 +190,10 @@ export const Question = memo(
     );
   },
   (prev, next) => {
-    if (prev.options !== next.options || prev.question !== next.question) {
-      return false;
-    }
-    return true;
+    const areEqual =
+      prev.id === next.id &&
+      prev.options === next.options &&
+      prev.question === next.question;
+    return areEqual;
   }
 );

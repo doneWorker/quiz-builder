@@ -36,7 +36,7 @@ export const Actions = () => {
         >
           Export
         </Button>
-        <Link to="/preview">
+        <Link to="/preview" style={{ textDecoration: "none" }}>
           <Button variant="contained" startIcon={<VisibilityIcon />}>
             Preview
           </Button>

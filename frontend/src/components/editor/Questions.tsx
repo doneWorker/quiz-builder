@@ -33,12 +33,20 @@ export const Questions = () => {
                       {...provided.dragHandleProps}
                     >
                       <Question
+                        id={item.id}
                         isEditing={false}
                         question={item.question}
                         options={item.options}
                         updateQuestion={(title: string) =>
                           updateQuestion(item.id, title)
                         }
+                        moveUp={() =>
+                          index > 0 && moveQuestion(index, index - 1)
+                        }
+                        moveDown={() => {
+                          index < quiz.items.length &&
+                            moveQuestion(index, index + 1);
+                        }}
                         deleteQuestion={() => deleteQuestion(item.id)}
                         cloneQuestion={() => cloneQuestion(item.id)}
                         createOption={() => createOption(item.id)}

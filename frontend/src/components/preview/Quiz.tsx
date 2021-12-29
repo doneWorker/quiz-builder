@@ -39,9 +39,9 @@ export const Quiz: React.FC<Props> = ({ data }: Props) => {
           <Box sx={{ position: "relative" }}>
             <Typography>{item.question || "Your question"}</Typography>
           </Box>
-          <List>
+          <List sx={{ p: 0 }}>
             {item.options.map((opt: QuizOption) => (
-              <ListItem key={opt.id}>
+              <ListItem sx={{ p: 0 }} key={opt.id}>
                 <Radio
                   checked={result[item.id] === opt.id}
                   onChange={() => handleSelect(item.id, opt.id)}
