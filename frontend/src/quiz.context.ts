@@ -100,7 +100,7 @@ export const getQuizMethods = (
 ): Record<string, Function> => {
   return {
     updateHeadline: (headline: string): void => {
-      dispatch({ type: actions.UPDATE_HEADLINE, payload: headline });
+      dispatch({ type: actions.UPDATE_HEADLINE, payload: { headline } });
     },
 
     createQuestion: (): void => {

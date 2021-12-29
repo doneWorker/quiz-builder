@@ -162,7 +162,7 @@ const QuestionLabel = (props: Props & { onEdit: Function }) => {
       </Box>
       <List>
         {props.options.map((opt) => (
-          <ListItem>
+          <ListItem key={opt.id}>
             <Radio checked={opt.isCorrect} />
             <Typography>{opt.title}</Typography>
           </ListItem>
