@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -11,6 +12,7 @@ import { QuizContext } from "../../quiz.context";
 
 export const Actions = () => {
   const { createQuestion, quiz } = useContext(QuizContext);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const exportQuiz = () => {
     alert(JSON.stringify(quiz));
@@ -19,7 +21,13 @@ export const Actions = () => {
   return (
     <Paper
       elevation={5}
-      sx={{ width: "100%", p: 1, mt: 2, boxSizing: "border-box" }}
+      sx={{
+        width: "100%",
+        p: 1,
+        mt: 2,
+        boxSizing: "border-box",
+        "& .MuiButton-startIcon": isMobile ? { m: 0 } : null,
+      }}
     >
       <Stack spacing={2} direction="row">
         <Button
@@ -27,18 +35,18 @@ export const Actions = () => {
           startIcon={<AddIcon />}
           onClick={createQuestion}
         >
-          Add Question
+          {!isMobile && "Add Question"}
         </Button>
         <Button
           variant="contained"
           startIcon={<UpgradeIcon />}
           onClick={exportQuiz}
         >
-          Export
+          {!isMobile && "Export"}
         </Button>
         <Link to="/preview" style={{ textDecoration: "none" }}>
           <Button variant="contained" startIcon={<VisibilityIcon />}>
-            Preview
+            {!isMobile && "Preview"}
           </Button>
         </Link>
       </Stack>
